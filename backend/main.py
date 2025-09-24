@@ -24,6 +24,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://dev-class.onrender.com",
+    "https://dev-class-web.onrender.com"
 ]
 
 app.add_middleware(
