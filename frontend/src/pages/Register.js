@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import api from '../services/api';
+import { endpoints } from '../config/api';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -8,13 +10,37 @@ function Register() {
     password: '',
     confirmPassword: ''
   });
-  const [error] = useState('');
-  useNavigate(); // Será usado em breve para navegação após o registro
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui iremos implementar a lógica de registro
-    console.log('Register:', formData);
+    
+    // Validações básicas
+    if (formData.password !== formData.confirmPassword) {
+      setError('As senhas não coincidem');
+      return;
+    }
+
+    try {
+      // Removendo confirmPassword antes de enviar
+      const { confirmPassword, ...registrationData } = formData;
+      
+      // Chamada à API para registro
+      const response = await api.post(endpoints.register, registrationData);
+      
+      // Se o registro foi bem-sucedido
+      if (response.data.access_token) {
+        // Salva o token no localStorage
+        localStorage.setItem('token', response.data.access_token);
+        // Redireciona para o dashboard
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      // Tratamento de erros
+      const errorMessage = err.response?.data?.detail || 'Erro ao tentar cadastrar. Tente novamente.';
+      setError(errorMessage);
+    }
   };
 
   const handleChange = (e) => {
