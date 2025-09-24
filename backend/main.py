@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, converters
 from database.models import create_tables
+from datetime import datetime
 
 # Cria a aplicação FastAPI com um título personalizado
 app = FastAPI(title="Curso Dev API")
@@ -38,6 +39,9 @@ app.include_router(
 )
 
 # Rota básica para verificar se a API está funcionando
+@app.get("/api/health")
+async def health_check():
+    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
 @app.get("/")
 async def root():
     return {"message": "Bem-vindo à API do Curso Dev!"}
