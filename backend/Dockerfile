@@ -1,19 +1,30 @@
-# Dockerfile para o Backend (Python/FastAPI)
+# Imagem base
 FROM python:3.9-slim
 
+# Define o diretório de trabalho
 WORKDIR /app
+
+# Instala as dependências do sistema
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copia os arquivos de requisitos
 COPY requirements.txt .
 
-# Instala as dependências
+# Instala as dependências Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o resto do código
+# Copia o código da aplicação
 COPY . .
 
-# Expõe a porta que o FastAPI vai usar
+# Torna o script de início executável
+RUN chmod +x start.sh
+
+# Expõe a porta da aplicação
 EXPOSE 8000
 
-# Comando para iniciar o servidor
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Inicia a aplicação
+CMD ["./start.sh"]
