@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Conversores</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Página de Login -->
+    <div class="form-container" id="loginPage">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-field">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-field">
+                <label for="loginPassword">Senha:</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <div class="error-message" id="loginError"></div>
+            <button type="submit" class="button">Entrar</button>
+        </form>
+        <p>
+            Não tem uma conta? <a href="#" onclick="showPage('registerPage')">Cadastre-se</a>
+        </p>
+    </div>
+
+    <!-- Página de Cadastro -->
+    <div class="form-container hidden" id="registerPage">
+        <h2>Cadastro</h2>
+        <form id="registerForm">
+            <div class="form-field">
+                <label for="registerName">Nome:</label>
+                <input type="text" id="registerName" required>
+            </div>
+            <div class="form-field">
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-field">
+                <label for="registerPassword">Senha:</label>
+                <input type="password" id="registerPassword" required>
+            </div>
+            <div class="form-field">
+                <label for="confirmPassword">Confirmar Senha:</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
+            <div class="error-message" id="registerError"></div>
+            <button type="submit" class="button">Cadastrar</button>
+        </form>
+        <p>
+            Já tem uma conta? <a href="#" onclick="showPage('loginPage')">Faça login</a>
+        </p>
+    </div>
+
+    <!-- Dashboard (área logada) -->
+    <div class="dashboard hidden" id="dashboardPage">
+        <header class="dashboard-header">
+            <h1>Portal de Conversores</h1>
+            <button class="button" onclick="logout()">Sair</button>
+        </header>
+
+        <div class="converter-grid">
+            <!-- Conversor de Comprimento -->
+            <div class="converter-card">
+                <h3>Conversor de Comprimento</h3>
+                <div class="converter-content">
+                    <input type="number" id="lengthInput" placeholder="Digite o valor">
+                    <select id="lengthFromUnit">
+                        <option value="m">Metros</option>
+                        <option value="cm">Centímetros</option>
+                        <option value="km">Quilômetros</option>
+                    </select>
+                    <span>para</span>
+                    <select id="lengthToUnit">
+                        <option value="cm">Centímetros</option>
+                        <option value="m">Metros</option>
+                        <option value="km">Quilômetros</option>
+                    </select>
+                    <button onclick="convertLength()" class="button">Converter</button>
+                    <div class="result" id="lengthResult"></div>
+                </div>
+            </div>
+
+            <!-- Conversor de Volume -->
+            <div class="converter-card">
+                <h3>Conversor de Volume</h3>
+                <div class="converter-content">
+                    <input type="number" id="volumeInput" placeholder="Digite o valor">
+                    <select id="volumeFromUnit">
+                        <option value="l">Litros</option>
+                        <option value="ml">Mililitros</option>
+                        <option value="m3">Metros Cúbicos</option>
+                    </select>
+                    <span>para</span>
+                    <select id="volumeToUnit">
+                        <option value="ml">Mililitros</option>
+                        <option value="l">Litros</option>
+                        <option value="m3">Metros Cúbicos</option>
+                    </select>
+                    <button onclick="convertVolume()" class="button">Converter</button>
+                    <div class="result" id="volumeResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/converters.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
