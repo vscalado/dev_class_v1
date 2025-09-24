@@ -18,20 +18,21 @@ services:
       - "8000:8000"
     environment:
       - SECRET_KEY=sua_chave_secreta_aqui
-      - MONGODB_URL=mongodb://mongodb:27017
-    volumes:
-      - ./backend:/app
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/dev_class
     depends_on:
-      - mongodb
-    restart: always
+      - postgres
 
-  mongodb:
-    image: mongo:latest
+  postgres:
+    image: postgres:latest
+    container_name: dev_class_db
+    environment:
+      POSTGRES_DB: dev_class
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
-      - "27017:27017"
+      - "5432:5432"
     volumes:
-      - mongodb_data:/data/db
-    restart: always
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  mongodb_data:
+  postgres_data:
