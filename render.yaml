@@ -22,10 +22,11 @@ services:
     autoDeploy: true
 
   # Serviço do Frontend
-  - type: static
+  - type: web
     name: dev-class-web
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
+    staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
         value: https://dev-class-api.onrender.com
