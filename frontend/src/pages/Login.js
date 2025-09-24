@@ -4,8 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [error] = useState('');
+  useNavigate(); // Será usado em breve para navegação após o login
 
   const handleSubmit = async (e) => {
     e.preventDefault();

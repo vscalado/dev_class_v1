@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Dashboard() {
-  const [selectedConverter, setSelectedConverter] = useState(null);
+  const setSelectedConverter = useState(null)[1];
 
   const converters = [
     { id: 'length', title: 'Comprimento', description: 'Converta entre metros, centímetros, polegadas...' },

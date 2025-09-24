@@ -1,15 +1,35 @@
-# Dockerfile para o Frontend
+# Build stage
+FROM node:18.17.1-alpine as build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json .npmrc ./
+
+# Install dependencies
+RUN npm install --legacy-peer-deps
+
+# Copy project files
+COPY . .
+
+# Build project
+RUN npm run build
+
+# Production stage
 FROM nginx:alpine
 
-# Remove a configuração padrão do nginx
-RUN rm -f /etc/nginx/conf.d/default.conf
+# Remove default nginx configuration
+RUN rm -rf /etc/nginx/conf.d/*
 
-# Copia nossa configuração personalizada
+# Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copia os arquivos do frontend para o diretório de conteúdo do nginx
-COPY . /usr/share/nginx/html
+# Copy built assets from build stage
+COPY --from=build /app/build /usr/share/nginx/html
 
+# Expose port 80
 EXPOSE 80
 
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

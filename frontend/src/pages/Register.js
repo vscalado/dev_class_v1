@@ -8,8 +8,8 @@ function Register() {
     password: '',
     confirmPassword: ''
   });
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [error] = useState('');
+  useNavigate(); // Será usado em breve para navegação após o registro
 
   const handleSubmit = async (e) => {
     e.preventDefault();
