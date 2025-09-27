@@ -1,3 +1,21 @@
+/* === VARIÁVEIS DE TEMA === */
+:root {
+  /* Essas variáveis são injetadas pelo themeInjector.js */
+  /* Para alterar o tema, edite o arquivo src/config/theme.js */
+}
+
+/* === ESTILOS GLOBAIS === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  pointer-events: auto;
+  user-select: text;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +23,170 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* === APLICANDO O TEMA === */
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.3s ease;
+}
+
+/* === LAYOUT E CENTRALIZAÇÃO === */
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--bg-primary);
+  position: relative;
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* === ESTILOS PARA CONTAINERS === */
+.page-container {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* === ESTILOS PARA FORMULÁRIOS === */
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+input, textarea, select {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text) !important;
+  border: 1px solid var(--input-border) !important;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+  user-select: text !important;
+  position: relative;
+  z-index: 1;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* === ESTILOS PARA BOTÕES === */
+button {
+  background-color: var(--button-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 2;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+button.secondary {
+  background-color: var(--button-secondary);
+}
+
+/* === ESTILOS PARA CARDS/SURFACES === */
+.card, .form-container, .converter-card {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 32px;
+  border-radius: 12px;
+  margin: 16px auto;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--input-border);
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* === ESTILOS PARA TEXTO === */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+p, span, label {
+  color: var(--text-secondary);
+}
+
+/* === ESTILOS PARA LINKS === */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 2;
+}
+
+a:hover {
+  color: var(--button-hover);
+  text-decoration: underline;
+}
+
+/* === MENSAGENS DE STATUS === */
+.success {
+  color: var(--color-success);
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid var(--color-success);
+}
+
+.error {
+  color: var(--color-error);
+  background-color: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid var(--color-error);
+}
+
+.warning {
+  color: var(--color-warning);
+  background-color: rgba(245, 158, 11, 0.1);
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid var(--color-warning);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
 }

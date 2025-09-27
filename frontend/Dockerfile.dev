@@ -4,6 +4,9 @@ FROM node:18
 # Define o diretório de trabalho
 WORKDIR /app
 
+# Variável de ambiente para corrigir problema de hash
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 # Copia os arquivos de configuração
 COPY package*.json ./
 
