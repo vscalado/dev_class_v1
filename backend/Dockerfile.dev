@@ -1,5 +1,5 @@
-# Imagem base
-FROM python:3.13-slim
+# Imagem base Python
+FROM python:3.13
 
 # Define o diretório de trabalho
 WORKDIR /app
@@ -17,14 +17,11 @@ COPY requirements.txt .
 # Instala as dependências Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o código da aplicação
+# Copia o código fonte
 COPY . .
-
-# Torna o script de início executável
-RUN chmod +x start.sh
 
 # Expõe a porta da aplicação
 EXPOSE 8000
 
-# Inicia a aplicação
-CMD ["./start.sh"]
+# Comando para desenvolvimento com hot-reload
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
