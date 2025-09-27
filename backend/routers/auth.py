@@ -146,3 +146,26 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 @router.get("/me", response_model=UserBase)
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+@router.get("/users")
+async def get_all_users(db: Session = Depends(get_db)):
+    """
+    Endpoint para consultar todos os usuários cadastrados.
+    Por enquanto não requer autenticação.
+    """
+    users = db.query(User).all()
+    
+    # Retorna uma lista com informações básicas dos usuários (sem senha)
+    users_list = []
+    for user in users:
+        users_list.append({
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "created_at": user.created_at.isoformat() if hasattr(user, 'created_at') and user.created_at else None
+        })
+    
+    return {
+        "total": len(users_list),
+        "users": users_list
+    }

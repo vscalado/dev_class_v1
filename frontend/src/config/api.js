@@ -17,6 +17,7 @@ console.log('Exported apiConfig:', apiConfig);
 export const endpoints = {
     register: '/auth/register',
     login: '/auth/login',
+    users: '/auth/users',
     converters: {
         length: '/converters/length',
         volume: '/converters/volume',
